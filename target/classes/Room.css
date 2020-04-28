@@ -1,0 +1,12 @@
+
+.room{
+    -fx-background-color: #100c0c;
+}
+
+.room:hover{
+    -fx-background-color:#6666ff;
+}
+
+.room:pressed{
+    -fx-background-color:#0066ff;
+}
