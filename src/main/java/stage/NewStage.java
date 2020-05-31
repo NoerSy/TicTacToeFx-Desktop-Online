@@ -34,7 +34,6 @@ public class NewStage {
             primaryStage.setX(event.getScreenX() - xOffset);
             primaryStage.setY(event.getScreenY() - yOffset);
         });
-
         primaryStage.setScene(scene);
         //primaryStage.show();
 
@@ -45,12 +44,14 @@ public class NewStage {
                           String player,
                           String lawan,
                           String noRoom,
-                          Common setServerService) {
+                          Common setServerService,
+                          Stage stage) {
         BoardController controller = firstLoader.<BoardController>getController();
         controller.setNama(nama);
         controller.setNamaL(namaL);
         controller.setnoRoom(noRoom);
         controller.setPlayer(player, lawan);
         controller.setServerService(setServerService);
+        controller.setStage(stage);
     }
 }

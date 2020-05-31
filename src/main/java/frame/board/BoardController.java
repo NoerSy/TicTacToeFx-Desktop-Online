@@ -14,12 +14,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import static javafx.application.Platform.runLater;
 
 public class BoardController implements Initializable {
 
+    private Stage stage;
     private Common ServerService;
     private String tampG;
     private String tempG;
@@ -33,6 +35,7 @@ public class BoardController implements Initializable {
     private Timeline Timer;
     private Integer timeSeconds;
 
+    @FXML private Pane mainFxmlClass;
     @FXML private Label Np1;
     @FXML private Label Np2;
     @FXML private Label ScP1;
@@ -68,8 +71,12 @@ public class BoardController implements Initializable {
 
     @FXML
     private void ActionClose() {
-        batalP();
-        System.exit(0);
+        if(!notice.getText().equalsIgnoreCase(" Lost Connected!"))
+            ServerService.mSMovePlayer("Close", noRoom, playerSatu);
+        GameStop();
+        Stage stage = (Stage) mainFxmlClass.getScene().getWindow();
+        stage.close();
+        this.stage.show();
     }
     @FXML
     private void ActionBoardReset(){
@@ -216,10 +223,12 @@ public class BoardController implements Initializable {
         PaneButton.setOnMouseEntered((MouseEvent) -> {
             TimerPane.setVisible(false);
             Restart.setVisible(true);
+            PaneButton.setStyle("-fx-background-color : #330000;");
         });
         PaneButton.setOnMouseExited((MouseEvent) -> {
             TimerPane.setVisible(true);
             Restart.setVisible(false);
+            PaneButton.setStyle("-fx-background-color : #100c0c;");
         });
     }
 
@@ -240,14 +249,16 @@ public class BoardController implements Initializable {
     public void setServerService(Common ServerService){
         this.ServerService = ServerService;
     }
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
 
-    //Game Logic
+    //BoardID
     // Lxy11, Lxy12, Lxy13
     // Lxy21, Lxy22, Lxy23
     // Lxy31, Lxy32, Lxy33
 
     private void cekMenang(){
-
         // Player X
         if(      moved.getBoolx(Lxy11, Lxy12, Lxy13)){
             xMenang();
@@ -285,6 +296,21 @@ public class BoardController implements Initializable {
         }else if(moved.getBoolo(Lxy13, Lxy22, Lxy31)){
             oMenang();
         }
+
+        if(moved.cekTie(Lxy11, Lxy12, Lxy13,
+                Lxy21, Lxy22, Lxy23,
+                Lxy31, Lxy32, Lxy33))  gameSeri();
+
+        PaneButton.setOnMouseEntered((MouseEvent) -> {
+            TimerPane.setVisible(false);
+            Restart.setVisible(true);
+            PaneButton.setStyle("-fx-background-color : #330000;");
+        });
+        PaneButton.setOnMouseExited((MouseEvent) -> {
+            TimerPane.setVisible(false);
+            Restart.setVisible(true);
+            PaneButton.setStyle("-fx-background-color : #100c0c;");
+        });
     }
     private void xMenang(){
         notice.setText("Kamu Menang!");
@@ -298,6 +324,12 @@ public class BoardController implements Initializable {
         TimerLabel.setText("15");
         TimerPane.setVisible(false);
         Restart.setVisible(true);
+        FirebaseDatabase.getInstance().getReference()
+                .child("Room")
+                .child(noRoom)
+                .child(playerSatu)
+                .child("Score")
+                .setValue(ScP1.getText(), null);
     }
     private void oMenang(){
         notice.setText("Kamu Kalah!");
@@ -312,50 +344,78 @@ public class BoardController implements Initializable {
         TimerPane.setVisible(false);
         Restart.setVisible(true);
     }
-    private void Reset(){
+    private void gameSeri(){
+        notice.setText("Game Seri!");
+        Pnotice.setVisible(true);
+        Body.disableProperty().set(true);
+        Reset.setText("Restart");
+        Timer.stop();
+        Timer.setCycleCount(15);
+        TimerLabel.setText("15");
+        TimerPane.setVisible(false);
+        Restart.setVisible(true);
+    }
+    private void Reset() {
         Pnotice.setVisible(false);
-    Reset.setText("Reset");
-    Lxy11.setText("");
-    Lxy12.setText("");
-    Lxy13.setText("");
-    Lxy21.setText("");
-    Lxy22.setText("");
-    Lxy23.setText("");
-    Lxy31.setText("");
-    Lxy32.setText("");
-    Lxy33.setText("");
+        Reset.setText("Reset");
+        Lxy11.setText(" ");
+        Lxy12.setText(" ");
+        Lxy13.setText(" ");
+        Lxy21.setText(" ");
+        Lxy22.setText(" ");
+        Lxy23.setText(" ");
+        Lxy31.setText(" ");
+        Lxy32.setText(" ");
+        Lxy33.setText(" ");
 
-    xy11.disableProperty().set(false); xy11.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy12.disableProperty().set(false); xy12.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy13.disableProperty().set(false); xy13.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy21.disableProperty().set(false); xy21.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy22.disableProperty().set(false); xy22.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy23.disableProperty().set(false); xy23.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy31.disableProperty().set(false); xy31.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy32.disableProperty().set(false); xy32.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    xy33.disableProperty().set(false); xy33.setStyle(
-            "{-fx-background-color: white}"
-            + ":hover{-fx-background-color:#0066ff;}");
-    Body.disableProperty().set(false);
+        xy11.disableProperty().set(false);
+        xy11.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy12.disableProperty().set(false);
+        xy12.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy13.disableProperty().set(false);
+        xy13.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy21.disableProperty().set(false);
+        xy21.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy22.disableProperty().set(false);
+        xy22.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy23.disableProperty().set(false);
+        xy23.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy31.disableProperty().set(false);
+        xy31.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy32.disableProperty().set(false);
+        xy32.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        xy33.disableProperty().set(false);
+        xy33.setStyle(
+                "{-fx-background-color: white}"
+                        + ":hover{-fx-background-color:#0066ff;}");
+        Body.disableProperty().set(false);
     }
     private void ambilGlawan(String in){
-        if(in.equalsIgnoreCase("Reset")) {
+        if(in.equalsIgnoreCase("Close")) {
+            runLater(() -> {
+                System.out.println(in);
+                notice.setText(" Lost Connected!");
+                Pnotice.setVisible(true);
+                Body.disableProperty().set(true);
+                GameStop();
+            });
+        }else if(in.equalsIgnoreCase("Reset")) {
             runLater(() -> {
                 System.out.println(in);
                 Reset.setText("Reset");
@@ -363,7 +423,6 @@ public class BoardController implements Initializable {
                 Timer.setCycleCount(15);
                 TimerLabel.setText("15");
                 Reset();
-                cekMenang();
             });
         }else if(in.equalsIgnoreCase("Skip")) {
             runLater(() -> {
@@ -468,7 +527,6 @@ public class BoardController implements Initializable {
                 playTimer();
                 cekMenang();
             });
-
         }else if(in.equalsIgnoreCase("Lxy33")){
             runLater(() -> {
                 System.out.println(in);
@@ -505,33 +563,69 @@ public class BoardController implements Initializable {
         };
         FirebaseDatabase.getInstance().getReference().addValueEventListener(mSPalyerDua);
     }
-    private void batalP(){
-        FirebaseDatabase m = ServerService.getDatabase();
-        m.getReference().child("Room").child(noRoom).child("ID Room").setValue("", null);
-        m.getReference().child("Room").child(noRoom).child(playerSatu)
-                .child("Nama")
-                .setValue("", null);
-        m.getReference().child("Room").child(noRoom).child(playerSatu)
-                .child("Bxy")
-                .setValue("", null);
-        m.getReference().child("Room").child(noRoom).child(playerSatu)
-                .child("Score")
-                .setValue("", null);
-    }
     private void playTimer(){
         timeSeconds = 15;
         Timer = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-              timeSeconds--;
-              TimerLabel.setText(timeSeconds.toString());
-              if (timeSeconds <= 0) {
-                  ServerService.mSMovePlayer("Skip", noRoom, playerSatu);
-                  Body.disableProperty().set(true);
-                  Timer.stop();
-                  TimerPane.setVisible(false);
-                  Restart.setVisible(true);
-              }
+            timeSeconds--;
+            TimerPane.setVisible(true);
+            Restart.setVisible(false);
+            TimerLabel.setText(timeSeconds.toString());
+            if (timeSeconds <= 0) {
+                ServerService.mSMovePlayer("Skip", noRoom, playerSatu);
+                Body.disableProperty().set(true);
+                Timer.stop();
+                TimerPane.setVisible(false);
+                Restart.setVisible(true);
+                PaneButton.setOnMouseEntered((MouseEvent) -> {
+                    TimerPane.setVisible(false);
+                    Restart.setVisible(true);
+                    PaneButton.setStyle("-fx-background-color : #330000;");
+                });
+                PaneButton.setOnMouseExited((MouseEvent) -> {
+                    TimerPane.setVisible(false);
+                    Restart.setVisible(true);
+                    PaneButton.setStyle("-fx-background-color : #100c0c;");
+                });
+            }
         }));
         Timer.setCycleCount(15);
         Timer.playFromStart();
+        PaneButton.setOnMouseEntered((MouseEvent) -> {
+            TimerPane.setVisible(false);
+            Restart.setVisible(true);
+            PaneButton.setStyle("-fx-background-color : #330000;");
+        });
+        PaneButton.setOnMouseExited((MouseEvent) -> {
+            TimerPane.setVisible(true);
+            Restart.setVisible(false);
+            PaneButton.setStyle("-fx-background-color : #100c0c;");
+        });
+    }
+    private void stopTimer(){
+        try{
+            if(Timer == null) throw new NullPointerException();
+            Timer.stop();
+            Timer.setCycleCount(15);
+            TimerLabel.setText("15");
+        }catch (NullPointerException ignored){
+
+        }
+    }
+    private void GameStop(){
+        FirebaseDatabase m = ServerService.getDatabase();
+        m.getReference().child("Room").child(noRoom).child("ID Room").removeValue(null);
+        m.getReference().child("Room").child(noRoom).child(playerSatu)
+                .child("Nama")
+                .removeValue(null);
+        m.getReference().child("Room").child(noRoom).child(playerSatu)
+                .child("Bxy")
+                .removeValue(null);
+        m.getReference().child("Room").child(noRoom).child(playerSatu)
+                .child("Score")
+                .removeValue(null);
+        stopTimer();
+        TimerPane.setVisible(false);
+        Restart.setVisible(true);
+        Reset.setText("");
     }
 }

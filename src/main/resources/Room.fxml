@@ -48,21 +48,21 @@
             </HBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="1">
+      <HBox id="tabel1" alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="1">
          <children>
             <HBox id="hb1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label id="IdRoom" fx:id="roomR" text="Room 1" />
+                  <Label id="IdRoom" fx:id="roomR" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="nPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="nPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -71,12 +71,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="sPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="sPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -91,21 +91,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </HBox>
-      <HBox alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="2">
+      <HBox id="tabel2" alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="2">
          <children>
             <HBox id="hb2" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label id="IdRoom" text="Room 2" />
+                  <Label id="IdRoom" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="nPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="nPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -114,12 +114,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="sPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="sPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -134,21 +134,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </HBox>
-      <HBox alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="3">
+      <HBox id="tabel3" alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="3">
          <children>
             <HBox id="hb3" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label id="IdRoom" text="Room 3" />
+                  <Label id="IdRoom" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="nPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="nPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -157,12 +157,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="sPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="sPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -177,21 +177,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </HBox>
-      <HBox alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="4">
+      <HBox id="tabel4" alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="4">
          <children>
             <HBox id="hb4" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label id="IdRoom" text="Room 4" />
+                  <Label id="IdRoom" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="nPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="nPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -200,12 +200,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="sPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="sPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -220,21 +220,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </HBox>
-      <HBox alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="5">
+      <HBox id="tabel5" alignment="CENTER" onMouseClicked="#ActionGet" prefHeight="100.0" prefWidth="200.0" styleClass="room" stylesheets="@Room.css" GridPane.rowIndex="5">
          <children>
             <HBox id="hb5" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label id="IdRoom" text="Room 5" />
+                  <Label id="IdRoom" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="nPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="nPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -243,12 +243,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Label">
+                  <Label id="sPlayerSatu">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label text="Label">
+                  <Label id="sPlayerDua">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
