@@ -4,23 +4,22 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.*;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Objects;
+import java.io.InputStream;
 
 public class Common {
 
     Common() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream(
-                Objects.requireNonNull(this.getClass().getClassLoader().getResource(
-                        "tictactoefx-firebase-admin.json"
-                )).getPath());
+        InputStream serviceAccount = this.getClass().getResourceAsStream(
+                        "/tictactoefx-firebase-admin.json"
+                );
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setDatabaseUrl("https://tictactoefx.firebaseio.com")
                 .build();
         FirebaseApp.initializeApp(options);
     }
+
     public FirebaseDatabase getDatabase(){
         return FirebaseDatabase.getInstance();
     }
@@ -31,7 +30,7 @@ public class Common {
                 .child("ID Room")
                 .setValue(Id, null);
     }
-    void mSNamaPlayerSatu(String nama, String noRoom) {
+    public void mSNamaPlayerSatu(String nama, String noRoom) {
         FirebaseDatabase.getInstance().getReference()
                 .child("Room")
                 .child(noRoom)
@@ -39,7 +38,7 @@ public class Common {
                 .child("Nama")
                 .setValue(nama, null);
     }
-    void mSNamaPlayerDua(String nama, String noRoom) {
+    public void mSNamaPlayerDua(String nama, String noRoom) {
         FirebaseDatabase.getInstance().getReference()
                 .child("Room")
                 .child(noRoom)
@@ -54,21 +53,5 @@ public class Common {
                 .child(Player)
                 .child("Bxy")
                 .setValue(Bxy, null);
-    }
-    public void mSScorePlayerDua(String score, String noRoom) {
-        FirebaseDatabase.getInstance().getReference()
-                .child("Room")
-                .child(noRoom)
-                .child("playerDua")
-                .child("Score")
-                .setValue(score, null);
-    }
-    public void mSScorePlayerSatu(String score, String noRoom) {
-        FirebaseDatabase.getInstance().getReference()
-                .child("Room")
-                .child(noRoom)
-                .child("playerSatu")
-                .child("Score")
-                .setValue(score, null);
     }
 }
